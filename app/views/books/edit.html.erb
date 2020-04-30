@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-6 col-xs-offset-3">
+      <h1>Editing Book</h1>
+
+          <% if @book.errors.any? %>
+            <h5><%= @book.errors.count %> errors prohibited this obj from being saved:</h5>
+            <ul>
+              <% @book.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          <% end %>
+
+      <%= form_for(@book, {class: "form-group"}) do |f| %>
+
+        <%= f.label :title %>
+        <%= f.text_field :title, class: "form-control" %>
+
+        <%= f.label :opinion %>
+        <%= f.text_area :body, class: "form-control" %>
+        <br>
+        <%= f.submit 'Update Book', class: "btn btn-primary form-control" %>
+
+      <% end %>
+      <p>
+        <%=link_to "Show", book_path(@book) %>
+        |
+        <%=link_to "Back", books_path %>
+      </p>
+    </div>
+  </div>
+</div>
