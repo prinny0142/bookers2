@@ -12,7 +12,7 @@
     </div>
     <div class="row">
       <div class="col-xs-3">
-      <%= render 'users/list', user: @user, book: @book %>
+      <%= render 'users/list', user: current_user, book: @book %>
       </div>
       
       <div class="col-xs-9">
@@ -24,6 +24,8 @@
               <th></th>
               <th>Title</th>
               <th>Opinion</th>
+              <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -37,6 +39,13 @@
                </td>
               <td><%= link_to book.title, book_path(book) %></td>
               <td><%= book.body %></td>
+
+              <%= render 'favorites', book: book %>
+
+              <td>
+                コメント数: <%= book.book_comments.count %>
+              </td>
+
             </tr>
             <% end %>
           </tbody>
