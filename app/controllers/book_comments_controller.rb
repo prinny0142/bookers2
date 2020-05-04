@@ -1,4 +1,5 @@
 class BookCommentsController < ApplicationController
+  before_action :authenticate_user!
   before_action :baria_user, only: [:destroy]
 
   def create
@@ -11,6 +12,7 @@ class BookCommentsController < ApplicationController
   end
 
   def destroy
+    comment = BookComment.find(params[:book_comment_id])
     comment.destroy
     redirect_back(fallback_location: root_path)
   end
@@ -21,7 +23,7 @@ class BookCommentsController < ApplicationController
   end
 
   def baria_user
-    comment = BookComment.find(params[:book_id])
+    comment = BookComment.find(params[:book_comment_id])
     unless comment.user_id == current_user.id
       redirect_to user_path(current_user)
     end
