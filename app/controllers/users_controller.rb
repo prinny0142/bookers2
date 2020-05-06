@@ -2,7 +2,6 @@ class UsersController < ApplicationController
 before_action :authenticate_user!
 
   def index
-    @user = current_user
     @users = User.all
     @book = Book.new
   end
@@ -27,6 +26,16 @@ before_action :authenticate_user!
     else
       render action: :edit
     end
+  end
+
+  def follows
+    user = User.find(params[:id])
+    @users = user.followings
+  end
+
+  def followers
+    user = User.find(params[:id])
+    @users = user.followers
   end
 
 private
