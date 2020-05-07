@@ -1,0 +1,51 @@
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-4 col-xs-offset-4">
+        <%= form_with url: search_users_path, method: :get, local: true do |f| %>
+          <%= f.text_field :name %>
+          <%= f.submit 'Search' %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-3">
+      <%= render 'users/info', user: current_user, book: @book %>
+      </div>
+
+      <div class="col-xs-9">
+        <h2>Users</h2>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>image</th>
+              <th>name</th>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <hbody>
+            <% @records.each do |user| %>
+            <tr>
+              <td><%= attachment_image_tag user, :profile_image, fallback: "no_image.jpg",size: "10*10" %></td>
+              <td><%= user.name %></td>
+              <td>フォロー数：<%= user.followings.count %></td>
+              <td>フォロワー数：<%= user.followers.count %></td>
+              <td>
+                <% if current_user != user %>
+                  <% if user.followed_by?(current_user) %>
+                    <p><%= link_to "フォローを外す", user_relationships_path(user), method: :delete %></p>
+                  <% else %>
+                    <p><%= link_to "フォローする", user_relationships_path(user), method: :post %></p>
+                  <% end %>
+                <% end %>
+              </td>
+              <td><%= link_to "Show", user_path(user.id) %></td>
+            </tr>
+            <% end %>
+          </hbody>
+        </table>
+      </div>
+    </div>
+  </div>

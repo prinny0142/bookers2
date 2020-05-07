@@ -9,6 +9,10 @@ class ApplicationController < ActionController::Base
     root_path
   end
   
+  def search
+    @users = User.search(params[:search])
+  end
+
   protected
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:email])

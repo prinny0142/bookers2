@@ -5,11 +5,14 @@
       <p><%= flash[:notice] %></p>
       <% end %>
     </div>
+
+    <%= render 'users/form' %>
+
     <div class="row">
       <div class="col-xs-3">
-      <%= render 'users/list', user: current_user, book: @book %>
+        <%= render 'users/info', user: current_user, book: @book %>
       </div>
-      
+
       <div class="col-xs-9">
         <h2>Book detail</h2>
 
@@ -18,7 +21,7 @@
             <tr>
               <td>
                 <%= link_to user_path(@book.user.id) do %>
-                 <%= attachment_image_tag @book.user, :profile_image, :fill, 40, 40, fallback: "no_image.jpg", size: '40x40' %>
+                 <%= attachment_image_tag @book.user, :profile_image, fallback: "no_image.jpg", size: '40x40' %>
                  <br><%= @book.user.name %></br>
                  <% end %>
               </td>

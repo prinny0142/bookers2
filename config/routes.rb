@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       get :follows
       get :followers
     end
+    get :search, on: :collection
     resource :relationships, only:[:create, :destroy]
   end
   resources :books, only: [:index, :show, :edit, :create, :update, :destroy] do

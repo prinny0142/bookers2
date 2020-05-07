@@ -1,0 +1,18 @@
+  <div class="container">
+
+    <%= render 'users/form' %>
+
+    <div class="row">
+      <div class="col-xs-3">
+        <%= render 'users/info', user: current_user, book: @book %>
+      </div>
+
+      <div class="col-xs-9">
+        <% if @model == "user" %>
+          <%= render 'users/list', users: @records %>
+        <% elsif @model == "book" %>
+          <%= render 'books/shelf', books: @records %>
+        <% end%>
+      </div>
+    </div>
+  </div>
